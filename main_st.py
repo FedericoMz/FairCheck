@@ -141,7 +141,7 @@ def get_discrimination (df, sensitive_attributes, class_name):
         fig = go.Figure(data=[go.Pie(labels=labels, values=sizes)])
         
         # Update layout
-        fig.update_layout(title="Global Discrimination for " + str(attribute))
+        ##fig.update_layout(title="Global Discrimination for " + str(attribute))
         
         # Display pie chart using Streamlit
         st.plotly_chart(fig)
