@@ -136,15 +136,16 @@ def get_discrimination (df, sensitive_attributes, class_name):
         
         labels = ['Unbiased', 'Biased']
         sizes = [100 - round(attribute_disc, 2), round(attribute_disc, 2)]
-
-        # Create pie chart
-        fig, ax = plt.subplots()
-        ax.pie(sizes, startangle=90, labels=labels, autopct='%1.1f%%')
-        ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-        plt.title("Global Discrimination for " + str(attr))
-
+        
+        # Create pie chart using Plotly
+        fig = go.Figure(data=[go.Pie(labels=labels, values=sizes)])
+        
+        # Update layout
+        fig.update_layout(title="Global Discrimination for " + str(attribute))
+        
         # Display pie chart using Streamlit
-        st.pyplot(fig)
+        st.plotly_chart(fig)
+
         
 
         
@@ -153,21 +154,22 @@ def get_discrimination (df, sensitive_attributes, class_name):
             
             labels = ['Unbiased, ' + str(100 - sum(percs)) + "%"]
             sizes = [100 - sum(percs)]
-
+            
             for val, perc in zip(vals, percs):
                 labels.append(val + ", " + str(perc) + "%")
                 sizes.append(perc)
-
-            # Create pie chart
-            fig, ax = plt.subplots()
-            patches, texts = ax.pie(sizes, startangle=90)
-            plt.legend(patches, labels, loc="lower right")
-            plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-            plt.tight_layout()
-            plt.title(attr + " " + stat + " " + "values")
-
+            
+            # Create pie chart using Plotly
+            fig = go.Figure(data=[go.Pie(labels=labels, values=sizes)])
+            
+            # Update layout
+            fig.update_layout(
+                title=attr + " " + stat + " " + "values",
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            )
+            
             # Display pie chart using Streamlit
-            st.pyplot(fig)
+            st.plotly_chart(fig)
                                    
     return sensitive_dict            
 
