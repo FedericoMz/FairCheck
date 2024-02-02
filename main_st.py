@@ -137,21 +137,13 @@ def get_discrimination (df, sensitive_attributes, class_name):
         labels = ['Unbiased', 'Biased']
         sizes = [100 - round(attribute_disc, 2), round(attribute_disc, 2)]
         
-        fig = go.Figure()
+        # Create pie chart using Plotly
+        fig = go.Figure(data=[go.Pie(labels=labels, values=sizes)])
         
-        for i in range(len(labels)):
-            fig.add_trace(go.Bar(
-                x=[1],  # Use a constant x value to stack bars
-                y=[sizes[i]],
-                name=labels[i]
-            ))
+        # Update layout
+        ##fig.update_layout(title="Global Discrimination for " + str(attribute))
         
-        fig.update_layout(
-            ##title="Global Discrimination for " + str(attribute),  # Update title as needed
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-            barmode='stack'  # Stacking bars
-        )
-        
+        # Display pie chart using Streamlit
         st.plotly_chart(fig)
 
         
@@ -167,19 +159,16 @@ def get_discrimination (df, sensitive_attributes, class_name):
                 labels.append(val + ", " + str(perc) + "%")
                 sizes.append(perc)
             
-            for i in range(len(labels)):
-                fig.add_trace(go.Bar(
-                    x=[1],  # Use a constant x value to stack bars
-                    y=[sizes[i]],
-                    name=labels[i]
-                ))
+            # Create pie chart using Plotly
+            fig = go.Figure(data=[go.Pie(labels=labels, values=sizes)])
             
+            # Update layout
             fig.update_layout(
                 title=attr + " " + stat + " " + "values",
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-                barmode='stack'  # Stacking bars
             )
             
+            # Display pie chart using Streamlit
             st.plotly_chart(fig)
                                    
     return sensitive_dict            
@@ -214,8 +203,3 @@ if uploaded_file:
 
 
 st.sidebar.info("\nMade by Federico Mazzoni")
-
-
-      
-
-
