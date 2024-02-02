@@ -141,7 +141,7 @@ def get_discrimination (df, sensitive_attributes, class_name):
         fig, ax = plt.subplots()
         ax.pie(sizes, startangle=90, labels=labels, autopct='%1.1f%%')
         ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-        plt.title("Global Discrimination for " + str(attribute))
+        plt.title("Global Discrimination for " + str(attr))
 
         # Display pie chart using Streamlit
         st.pyplot(fig)
