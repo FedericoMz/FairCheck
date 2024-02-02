@@ -192,7 +192,9 @@ if uploaded_file:
     class_name = st.selectbox("Select the class...", cols, key=2)
 
     if SA and class_name:
-        get_discrimination(df, [SA], class_name)
+        analyze_button = st.button("Analyze!")
+        if analyze_button:
+            get_discrimination(df, [SA], class_name)
 
 
         
