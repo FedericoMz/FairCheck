@@ -147,7 +147,7 @@ def get_discrimination (df, sensitive_attributes, class_name):
             ))
         
         fig.update_layout(
-            title="Global Discrimination for " + str(attribute),  # Update title as needed
+            ##title="Global Discrimination for " + str(attribute),  # Update title as needed
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
             barmode='stack'  # Stacking bars
         )
