@@ -178,13 +178,19 @@ st.title("FairCheck")
 st.sidebar.subheader("Dataset")
 uploaded_file = st.sidebar.file_uploader("Upload a dataset", type="csv")
 
+cols = []
+
+df = pd.read_csv(uploaded_file)
+    
+SA = st.sidebar.selectbox("Select a sensitive attribute...", cols)
+class_name = st.sidebar.selectbox("Select a sensitive attribute...", cols)
+
+
+
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+
+    cols = list(df.columns)
     
-    SA = st.sidebar.selectbox("Select a sensitive attribute...", list(df.columns))
-    
-    class_name = st.sidebar.selectbox("Select a sensitive attribute...", list(df.columns))
-        
     get_discrimination(df, [SA], class_name)
 
 
