@@ -1,0 +1,20 @@
+        entities_B = extract_named_entities(text_B)
+        n_entities_B = len(entities_B)
+        text_B_Bnonymized = anonymized_text(text_B)
+
+    
+        tokens = nltk.word_tokenize(text_B_Anonymized.lower())
+        stop_words = set(stopwords.words('english'))
+        content_tokens = [token for token in tokens if token.isalnum() and token not in stop_words]
+
+        words = 0
+        for word in content_tokens:
+                words += 1
+
+        if n_entities_B != 0:
+                boost = n_entities_B / len(content_tokens) if len(content_tokens) > 0 else 0
+                words += boost * n_entities_B
+
+        information_density = words / len(tokens) if len(tokens) > 0 else 0
+
+        return information_density
