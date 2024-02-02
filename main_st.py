@@ -180,12 +180,12 @@ uploaded_file = st.sidebar.file_uploader("Upload a dataset", type="csv")
 
 cols = []
     
-SA = st.selectbox("Select a sensitive attribute...", cols)
-class_name = st.selectbox("Select a sensitive attribute...", cols)
+SA = st.selectbox("Select a sensitive attribute...", cols, key=1)
+class_name = st.selectbox("Select the class...", cols, key=2)
 
 
 
-if uploaded_file is not None:
+if uploaded_file:
 
     df = pd.read_csv(uploaded_file)
 
